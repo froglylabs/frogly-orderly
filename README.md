@@ -1,6 +1,6 @@
 # Frogly for Orderly
 
-Keep your DEX safe from AI attacks. Frogly adds hidden decoys to your DEX. When an automated intruder takes one, Frogly records a catch, and on paid plans it can send that visitor into a fake back office (the maze) that Frogly hosts away from your DEX.
+Keep your DEX safe from AI attacks. Frogly adds hidden decoys to your DEX. When an automated intruder takes one, Frogly records a catch and can send that visitor into a fake back office (the maze) that Frogly hosts away from your DEX.
 
 ## Turn it on in DEX Creator
 
@@ -8,9 +8,11 @@ Open your DEX in [DEX Creator](https://dex.orderly.network/), find **Frogly** in
 
 ## Plans
 
-- **Free:** 10 catches a month, then Frogly naps until the 1st.
+- **Free:** maze on, 10 catches a month, then Frogly naps until the 1st.
 - **Pro, 19 USD a month:** maze on, 100 catches a month, up to 5 sites.
 - **Max, 99 USD a month:** maze on, unlimited catches and sites.
+
+Pro and Max are coming soon.
 
 ## See your catches
 
@@ -48,7 +50,7 @@ The plugin makes no network request of its own. The script it adds is the same p
 Described from the published source at [froglylabs/frogly-widget](https://github.com/froglylabs/frogly-widget):
 
 - Reads the site ID from `data-cfg`.
-- Loads `https://cdn.frogly.ai/cfg/<SITE_ID>.json` (CORS, credentials omit). Until Frogly's Orderly server side ships, that request answers 404 and the core does nothing further.
+- Loads `https://cdn.frogly.ai/cfg/<SITE_ID>.json` (CORS, credentials omit). If Frogly has no config for the DEX, that request answers 404 and the core does nothing further.
 - When a config is present, talks to `https://` + `portal_host` (api.frogly.ai): a `check_in` and later event POSTs to `/v1/events` (JSON, keepalive).
 - Keeps one random session key in `sessionStorage` (`cfg_sid`). No cookies.
 - Places hidden decoys in one off-screen box (`position:absolute;left:-10000px`, `aria-hidden`, `tabindex="-1"`) appended to `document.body`. Traders never see them.

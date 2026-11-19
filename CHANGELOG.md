@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Wording only: Free on Orderly DEXs now includes the maze. Settings text, listing description and README updated.
+- No code change. The pinned core script and its hash are unchanged.
+
 ## 0.1.0
 
 - First release of `@froglylabs/orderly-plugin` for Orderly SDK v3 and the Orderly Builders Marketplace.

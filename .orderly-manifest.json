@@ -3,7 +3,7 @@
   "pluginId": "frogly",
   "repoUrl": "https://github.com/froglylabs/frogly-orderly",
   "name": "Frogly",
-  "description": "Keep your DEX safe from AI attacks. Frogly adds hidden decoys; when an automated intruder takes one, Frogly records it. Free: 10 catches a month, no sign-up. See them at frogly.ai/orderly with your DEX wallet. Pro adds the maze, a fake back office that keeps intruders busy away from your DEX.",
+  "description": "Keep your DEX safe from AI attacks. Frogly adds hidden decoys; when an automated intruder takes one, Frogly records it and can lead it into the maze, a fake back office that keeps it busy away from your DEX. Free: 10 catches a month, maze on, no sign-up. See them at frogly.ai/orderly with your DEX wallet.",
   "tags": ["Tool"],
   "coverImages": [
     "./assets/covers/cover-1.png",
@@ -11,5 +11,5 @@
   ],
   "usagePrompt": "Add Frogly to a custom Orderly SDK v3 app.\n\n1. Install once:\n   pnpm add @froglylabs/orderly-plugin\n\n2. Register it on OrderlyAppProvider. No settings are needed. Register it once and never behind a condition:\n\n   import { registerFroglyPlugin } from \"@froglylabs/orderly-plugin\";\n\n   <OrderlyAppProvider\n     {...existingProps}\n     plugins={[registerFroglyPlugin()]}\n   >\n     {children}\n   </OrderlyAppProvider>\n\n3. Content Security Policy (if the host sets one):\n   - script-src https://cdn.frogly.ai\n   - connect-src https://cdn.frogly.ai https://api.frogly.ai\n\n4. Do not pass a claim code in app code. Claim codes are only for DEX Creator sites.\n\n5. siteId is code-only, for a DEX that already has a Frogly site:\n   plugins={[registerFroglyPlugin({}, { siteId: \"existing-site-id\" })]}\n   Otherwise omit it. The plugin derives the site ID from the Orderly broker ID.\n\n6. The plugin wraps Account.AccountMenu and Account.MobileAccountMenu and adds Frogly's script once. If Frogly cannot load, the app works exactly as before. It does not read wallet, account, order, or position data.",
   "createdAt": "2026-11-18T12:22:51.662Z",
-  "updatedAt": "2026-11-18T14:00:00.000Z"
+  "updatedAt": "2026-11-19T12:27:07.000Z"
 }

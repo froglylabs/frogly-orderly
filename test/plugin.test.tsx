@@ -273,7 +273,7 @@ describe("the settings form (configSchema.json)", () => {
     expect(schema.properties.claimCode.type).toBe("string");
     expect(schema.properties.claimCode.maxLength).toBe(64);
     expect(schema.properties.claimCode.description).toBe(
-      "Free: 10 catches a month, no sign-up. See them at frogly.ai/orderly with your DEX wallet. Pro adds the maze. Leave this empty unless frogly.ai/orderly gives you a code to prove this DEX is yours.",
+      "Free: 10 catches a month, maze on, no sign-up. See them at frogly.ai/orderly with your DEX wallet. Leave this empty unless frogly.ai/orderly gives you a code to prove this DEX is yours.",
     );
   });
 });

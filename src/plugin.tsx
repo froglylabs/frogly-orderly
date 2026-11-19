@@ -13,7 +13,7 @@ declare const __FROGLY_VERSION__: string;
  */
 export interface FroglySettings {
   /**
-   * Free: 10 catches a month, no sign-up. See them at frogly.ai/orderly with your DEX wallet. Pro adds the maze. Leave this empty unless frogly.ai/orderly gives you a code to prove this DEX is yours.
+   * Free: 10 catches a month, maze on, no sign-up. See them at frogly.ai/orderly with your DEX wallet. Leave this empty unless frogly.ai/orderly gives you a code to prove this DEX is yours.
    * @maxLength 64
    */
   claimCode?: string;
