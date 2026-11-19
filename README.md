@@ -1,6 +1,6 @@
 # Frogly for Orderly
 
-Frogly adds hidden decoys your traders never see. When an automated intruder takes one, Frogly records a catch, and on paid plans it can send that visitor into a fake back office (the maze) that Frogly hosts away from your DEX.
+Keep your DEX safe from AI attacks. Frogly adds hidden decoys to your DEX. When an automated intruder takes one, Frogly records a catch, and on paid plans it can send that visitor into a fake back office (the maze) that Frogly hosts away from your DEX.
 
 ## Turn it on in DEX Creator
 

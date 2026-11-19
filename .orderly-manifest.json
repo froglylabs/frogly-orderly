@@ -3,7 +3,7 @@
   "pluginId": "frogly",
   "repoUrl": "https://github.com/froglylabs/frogly-orderly",
   "name": "Frogly",
-  "description": "Decoys your traders never see. When an automated intruder takes one, Frogly records it. Free: 10 catches a month, no sign-up. See them at frogly.ai/orderly with your DEX wallet. Pro adds the maze, a fake back office that keeps intruders busy away from your DEX.",
+  "description": "Keep your DEX safe from AI attacks. Frogly adds hidden decoys; when an automated intruder takes one, Frogly records it. Free: 10 catches a month, no sign-up. See them at frogly.ai/orderly with your DEX wallet. Pro adds the maze, a fake back office that keeps intruders busy away from your DEX.",
   "tags": ["Tool"],
   "coverImages": [
     "./assets/covers/cover-1.png",
