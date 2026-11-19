@@ -19,7 +19,8 @@ Releases are published only by GitHub Actions (`.github/workflows/release.yml`) 
    cd ~/frogly-orderly && pnpm release:check
    ```
 
-4. Commit, push, and tag. The tag must equal the version (`v0.1.0` for `0.1.0`); the workflow checks this.
+4. Keep `package.json` free of npm lifecycle scripts (`preinstall`, `install`, `postinstall`, `prepare`, `prepublish`, `prepublishOnly`, `prepack`, `postpack`). The Orderly Marketplace review rejects a package that has any. The release workflow builds the package itself.
+5. Commit, push, and tag. The tag must equal the version (`v0.1.0` for `0.1.0`); the workflow checks this.
 
    ```bash
    cd ~/frogly-orderly && git tag v0.1.0
@@ -37,7 +38,7 @@ Use this whenever npm lets you add a trusted publisher for the package.
    - Repository: `frogly-orderly`
    - Workflow filename: `release.yml`
    - Environment: leave empty
-4. Save. Push the tag (step 4 above). The workflow publishes with OIDC and npm attaches provenance automatically.
+4. Save. Push the tag (step 5 above). The workflow publishes with OIDC and npm attaches provenance automatically.
 5. Afterwards, in the same **Settings** page under **Publishing access**, choose **Require two-factor authentication and disallow tokens**, and save.
 
 ## Path B: one-time first release with a short-lived token
@@ -48,7 +49,7 @@ Use this only if npm will not let you set up a trusted publisher before the pack
    - Expiration: 1 day.
    - Packages and scopes: read and write, limited to the `@froglylabs` scope.
 2. Copy the token. In GitHub open `froglylabs/frogly-orderly`, **Settings**, **Secrets and variables**, **Actions**, **New repository secret**. Name it `NPM_TOKEN` and paste the token.
-3. Push the tag (step 4 above). The workflow publishes `0.1.0` with the token, with provenance.
+3. Push the tag (step 5 above). The workflow publishes `0.1.0` with the token, with provenance.
 4. Check the release at https://www.npmjs.com/package/@froglylabs/orderly-plugin.
 5. Set up trusted publishing (Path A, steps 1 to 3).
 6. Delete the token everywhere:

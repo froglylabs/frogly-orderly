@@ -50,8 +50,7 @@
     "check:live": "node scripts/check-live-imports.mjs",
     "covers": "node scripts/build-covers.mjs",
     "e2e": "node scripts/e2e.mjs",
-    "release:check": "pnpm typecheck && pnpm test && pnpm build && pnpm verify:core && pnpm check:live && orderly-devkit check --path . --strict && orderly-devkit schema --path . --check",
-    "prepublishOnly": "pnpm build"
+    "release:check": "pnpm typecheck && pnpm test && pnpm build && pnpm verify:core && pnpm check:live && orderly-devkit check --path . --strict && orderly-devkit schema --path . --check"
   },
   "peerDependencies": {
     "@orderly.network/hooks": ">=3.0.0",
@@ -59,9 +58,13 @@
     "react": ">=18",
     "react-dom": ">=18"
   },
+  "peerDependenciesMeta": {
+    "@orderly.network/hooks": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@orderly.network/devkit": "1.4.1",
-    "@orderly.network/hooks": "3.4.1",
     "@orderly.network/plugin-core": "3.4.1",
     "@playwright/test": "1.65.1",
     "@types/node": "24.19.2",
@@ -73,6 +76,7 @@
     "sharp": "0.35.5",
     "tsup": "8.5.1",
     "typescript": "5.9.3",
+    "vite": "8.3.8",
     "vitest": "5.1.0"
   }
 }

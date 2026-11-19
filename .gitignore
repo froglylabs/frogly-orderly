@@ -12,8 +12,7 @@ dist
 .idea
 .DS_Store
 
-# Local npm settings must never be committed
-.npmrc
+# .npmrc is committed. It holds one pnpm setting and must never hold a token.
 
 # Logs
 *.log
