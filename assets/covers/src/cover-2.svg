@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
   <rect width="1280" height="800" fill="#F8EEDA"/>
-  <text x="640" y="390" fill="#141714" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="150" font-weight="700" text-anchor="middle">Frogly</text>
-  <text x="640" y="470" fill="#0f5021" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="44" text-anchor="middle">Turn it on in DEX Creator</text>
+  <svg x="548" y="193" width="184" height="184" viewBox="0 0 400 400">
+    <g transform="translate(0,20) scale(1)">
+    <ellipse cx="88" cy="262" fill="#0f5021" rx="70" ry="38" stroke="#141714" stroke-width="9"/>
+    <ellipse cx="312" cy="262" fill="#0f5021" rx="70" ry="38" stroke="#141714" stroke-width="9"/>
+    <path d="M60 230 C 50 140, 110 105, 200 105 C 290 105, 350 140, 340 230 C 335 275, 270 292, 200 292 C 130 292, 65 275, 60 230 Z" fill="#62ae50" stroke="#141714" stroke-width="9"/>
+    <ellipse cx="200" cy="238" fill="#f7eed5" rx="88" ry="48" stroke="#141714" stroke-width="7"/>
+    <circle cx="132" cy="102" fill="#62ae50" r="44" stroke="#141714" stroke-width="9"/>
+    <circle cx="268" cy="102" fill="#62ae50" r="44" stroke="#141714" stroke-width="9"/>
+    <ellipse cx="132" cy="100" fill="#f7eed5" rx="24" ry="30" stroke="#141714" stroke-width="6"/>
+    <ellipse cx="268" cy="100" fill="#f7eed5" rx="24" ry="30" stroke="#141714" stroke-width="6"/>
+    <ellipse cx="134" cy="96" fill="#141714" rx="11" ry="16"/>
+    <ellipse cx="270" cy="96" fill="#141714" rx="11" ry="16"/>
+    <ellipse cx="105" cy="180" fill="#0f5021" rx="14" ry="9"/>
+    <ellipse cx="300" cy="172" fill="#0f5021" rx="11" ry="8"/>
+    <path d="M140 168 Q 200 200 260 168" fill="none" stroke="#141714" stroke-linecap="round" stroke-width="8"/>
+    <ellipse cx="140" cy="292" fill="#0f5021" rx="34" ry="14" stroke="#141714" stroke-width="7"/>
+    <ellipse cx="260" cy="292" fill="#0f5021" rx="34" ry="14" stroke="#141714" stroke-width="7"/>
+  </g>
+  </svg>
+  <text x="640" y="493" fill="#141714" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="150" font-weight="700" text-anchor="middle">Frogly</text>
+  <text x="640" y="573" fill="#0f5021" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="44" text-anchor="middle">Turn it on in DEX Creator</text>
 </svg>

@@ -277,3 +277,11 @@ describe("the settings form (configSchema.json)", () => {
     );
   });
 });
+
+describe("the Marketplace usagePrompt (.orderly-manifest.json)", () => {
+  it("is 1,000 to 1,200 characters long", () => {
+    const manifest = JSON.parse(readRoot(".orderly-manifest.json")) as { usagePrompt: string };
+    expect(manifest.usagePrompt.length).toBeGreaterThanOrEqual(1000);
+    expect(manifest.usagePrompt.length).toBeLessThanOrEqual(1200);
+  });
+});
