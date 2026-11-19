@@ -79,7 +79,7 @@ const centreShiftX = ({ left, right }) => Math.round((WIDTH - left - right) / 2)
 // Cover 1: the frog and the text block are each centred on the canvas middle,
 // and the pair is centred across the canvas.
 const cover1Text = (dx, dy) => `<text x="${630 + dx}" y="${400 + dy}" fill="${INK}" font-family="${FONT}" font-size="150" font-weight="700">Frogly</text>
-  <text x="${634 + dx}" y="${475 + dy}" fill="${GREEN}" font-family="${FONT}" font-size="36">Keep your Dex Safe from AI Attacks</text>`;
+  <text x="${634 + dx}" y="${475 + dy}" fill="${GREEN}" font-family="${FONT}" font-size="36">Keep your DEX safe from AI attacks</text>`;
 const cover1FrogY = centreShift(await inkBox(frogAt(110, 0, COVER1_FROG)));
 const cover1TextDy = centreShift(await inkBox(cover1Text(0, 0)));
 const cover1Body = (dx) => `${frogAt(110 + dx, cover1FrogY, COVER1_FROG)}

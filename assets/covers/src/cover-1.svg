@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
   <rect width="1280" height="800" fill="#F8EEDA"/>
-  <svg x="82" y="169" width="460" height="460" viewBox="0 0 400 400">
+  <svg x="84" y="169" width="460" height="460" viewBox="0 0 400 400">
     <g transform="translate(0,20) scale(1)">
     <ellipse cx="88" cy="262" fill="#0f5021" rx="70" ry="38" stroke="#141714" stroke-width="9"/>
     <ellipse cx="312" cy="262" fill="#0f5021" rx="70" ry="38" stroke="#141714" stroke-width="9"/>
@@ -20,6 +20,6 @@
     <ellipse cx="260" cy="292" fill="#0f5021" rx="34" ry="14" stroke="#141714" stroke-width="7"/>
   </g>
   </svg>
-  <text x="602" y="413" fill="#141714" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="150" font-weight="700">Frogly</text>
-  <text x="606" y="488" fill="#0f5021" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="36">Keep your Dex Safe from AI Attacks</text>
+  <text x="604" y="413" fill="#141714" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="150" font-weight="700">Frogly</text>
+  <text x="608" y="488" fill="#0f5021" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="36">Keep your DEX safe from AI attacks</text>
 </svg>
