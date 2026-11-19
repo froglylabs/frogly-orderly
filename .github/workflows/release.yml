@@ -7,11 +7,13 @@ on:
 
 permissions:
   contents: read
-  id-token: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       # actions/checkout@v5
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
@@ -71,3 +73,38 @@ jobs:
           node --version
           npm --version
           npm publish --access public --provenance
+
+  # Runs only after the npm publish succeeded. It uses the built-in
+  # GITHUB_TOKEN, so the release author is github-actions, not a person. This
+  # job alone can write to the repository, and it has no npm credentials.
+  github-release:
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      # actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+
+      - name: Release notes from CHANGELOG.md
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          tag="v${version}"
+          test "$tag" = "$GITHUB_REF_NAME"
+          awk -v heading="## ${version}" '
+            $0 == heading { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGELOG.md > release-notes.md
+          if ! grep -q '[^[:space:]]' release-notes.md; then
+            echo "CHANGELOG.md has no section for ${version}" >&2
+            exit 1
+          fi
+          echo "TAG=${tag}" >> "$GITHUB_ENV"
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "$TAG" --verify-tag --title "$TAG" --notes-file release-notes.md

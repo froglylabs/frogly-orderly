@@ -60,5 +60,7 @@ Every later release uses Path A only.
 
 ## After a release
 
+- After the npm publish succeeds, the workflow creates the GitHub release itself (job `github-release`), with the built-in `GITHUB_TOKEN`, so its author is github-actions. The title is the tag (`v0.1.0`) and the notes are that version's section of `CHANGELOG.md`; the job fails if the section is missing. Do not create releases by hand.
+- Only that job can write to the repository (`contents: write`). The publish job has `contents: read` and `id-token: write`.
 - Confirm the version and its provenance badge on the npm package page.
 - Updating the Orderly Marketplace listing (`orderly-devkit submit`) is a separate, manual step done by a signed-in maintainer. It is not part of this workflow.

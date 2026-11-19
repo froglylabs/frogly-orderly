@@ -3,10 +3,10 @@
  * Builds the two Marketplace cover images from SVG sources with sharp.
  *
  * Orderly's marketplace submit accepts PNG/JPEG/WebP at exactly 1280x800 or
- * 640x400. These covers are 1280x800. assets/brand/ is empty, so both covers
- * are text-only (no frog logo).
+ * 640x400. These covers are 1280x800: a flat cream background, the frog from
+ * assets/brand/frogly-app-icon.svg on cover 1, the word Frogly and one short line.
  */
-import { mkdirSync, writeFileSync, existsSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
@@ -14,51 +14,41 @@ import sharp from "sharp";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const srcDir = join(root, "assets/covers/src");
 const outDir = join(root, "assets/covers");
-const brandLogo = join(root, "assets/brand/frog.png");
-
-mkdirSync(srcDir, { recursive: true });
-mkdirSync(outDir, { recursive: true });
 
 const WIDTH = 1280;
 const HEIGHT = 800;
+const BACKGROUND = "#F8EEDA";
+const INK = "#141714";
+const GREEN = "#0f5021";
+const FONT = "'Helvetica Neue', Helvetica, Arial, sans-serif";
 
-const hasLogo = existsSync(brandLogo);
-if (!hasLogo) {
-  console.log("covers: assets/brand/frog.png missing; building text-only covers");
-}
+/** The frog's shapes from the brand SVG, without the icon's own background square. */
+const brand = readFileSync(join(root, "assets/brand/frogly-app-icon.svg"), "utf8");
+const frog = brand.match(/<g[\s\S]*<\/g>/)?.[0];
+if (!frog) throw new Error("covers: no <g> group in assets/brand/frogly-app-icon.svg");
+const frogViewBox = brand.match(/viewBox="([^"]+)"/)?.[1] ?? "0 0 400 400";
 
 const cover1 = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0b1f14"/>
-      <stop offset="55%" stop-color="#12301d"/>
-      <stop offset="100%" stop-color="#0a1710"/>
-    </linearGradient>
-  </defs>
-  <rect width="${WIDTH}" height="${HEIGHT}" fill="url(#bg)"/>
-  <circle cx="1080" cy="160" r="220" fill="#1b4d2e" opacity="0.35"/>
-  <circle cx="180" cy="640" r="260" fill="#1b4d2e" opacity="0.25"/>
-  <text x="96" y="330" fill="#e8f5ec" font-family="Georgia, 'Times New Roman', serif" font-size="84" font-weight="700">Frogly for Orderly</text>
-  <text x="96" y="430" fill="#9fcdb0" font-family="Georgia, 'Times New Roman', serif" font-size="42">Decoys your traders never see</text>
+  <rect width="${WIDTH}" height="${HEIGHT}" fill="${BACKGROUND}"/>
+  <svg x="110" y="170" width="460" height="460" viewBox="${frogViewBox}">
+    ${frog}
+  </svg>
+  <text x="630" y="400" fill="${INK}" font-family="${FONT}" font-size="150" font-weight="700">Frogly</text>
+  <text x="634" y="475" fill="${GREEN}" font-family="${FONT}" font-size="40">Decoys your traders never see</text>
 </svg>
 `;
 
 const cover2 = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0%" stop-color="#0a1710"/>
-      <stop offset="100%" stop-color="#163825"/>
-    </linearGradient>
-  </defs>
-  <rect width="${WIDTH}" height="${HEIGHT}" fill="url(#bg)"/>
-  <text x="96" y="280" fill="#e8f5ec" font-family="Georgia, 'Times New Roman', serif" font-size="52" font-weight="700">Turn it on in DEX Creator</text>
-  <text x="96" y="390" fill="#c5e6d1" font-family="Georgia, 'Times New Roman', serif" font-size="42">Free: 10 catches a month, no sign-up</text>
-  <text x="96" y="500" fill="#9fcdb0" font-family="Georgia, 'Times New Roman', serif" font-size="42">See every catch at frogly.ai/orderly</text>
+  <rect width="${WIDTH}" height="${HEIGHT}" fill="${BACKGROUND}"/>
+  <text x="${WIDTH / 2}" y="390" fill="${INK}" font-family="${FONT}" font-size="150" font-weight="700" text-anchor="middle">Frogly</text>
+  <text x="${WIDTH / 2}" y="470" fill="${GREEN}" font-family="${FONT}" font-size="44" text-anchor="middle">Turn it on in DEX Creator</text>
 </svg>
 `;
 
+mkdirSync(srcDir, { recursive: true });
+mkdirSync(outDir, { recursive: true });
 writeFileSync(join(srcDir, "cover-1.svg"), cover1);
 writeFileSync(join(srcDir, "cover-2.svg"), cover2);
 

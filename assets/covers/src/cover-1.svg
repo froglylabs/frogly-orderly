@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0b1f14"/>
-      <stop offset="55%" stop-color="#12301d"/>
-      <stop offset="100%" stop-color="#0a1710"/>
-    </linearGradient>
-  </defs>
-  <rect width="1280" height="800" fill="url(#bg)"/>
-  <circle cx="1080" cy="160" r="220" fill="#1b4d2e" opacity="0.35"/>
-  <circle cx="180" cy="640" r="260" fill="#1b4d2e" opacity="0.25"/>
-  <text x="96" y="330" fill="#e8f5ec" font-family="Georgia, 'Times New Roman', serif" font-size="84" font-weight="700">Frogly for Orderly</text>
-  <text x="96" y="430" fill="#9fcdb0" font-family="Georgia, 'Times New Roman', serif" font-size="42">Decoys your traders never see</text>
+  <rect width="1280" height="800" fill="#F8EEDA"/>
+  <svg x="110" y="170" width="460" height="460" viewBox="0 0 400 400">
+    <g transform="translate(0,20) scale(1)">
+    <ellipse cx="88" cy="262" fill="#0f5021" rx="70" ry="38" stroke="#141714" stroke-width="9"/>
+    <ellipse cx="312" cy="262" fill="#0f5021" rx="70" ry="38" stroke="#141714" stroke-width="9"/>
+    <path d="M60 230 C 50 140, 110 105, 200 105 C 290 105, 350 140, 340 230 C 335 275, 270 292, 200 292 C 130 292, 65 275, 60 230 Z" fill="#62ae50" stroke="#141714" stroke-width="9"/>
+    <ellipse cx="200" cy="238" fill="#f7eed5" rx="88" ry="48" stroke="#141714" stroke-width="7"/>
+    <circle cx="132" cy="102" fill="#62ae50" r="44" stroke="#141714" stroke-width="9"/>
+    <circle cx="268" cy="102" fill="#62ae50" r="44" stroke="#141714" stroke-width="9"/>
+    <ellipse cx="132" cy="100" fill="#f7eed5" rx="24" ry="30" stroke="#141714" stroke-width="6"/>
+    <ellipse cx="268" cy="100" fill="#f7eed5" rx="24" ry="30" stroke="#141714" stroke-width="6"/>
+    <ellipse cx="134" cy="96" fill="#141714" rx="11" ry="16"/>
+    <ellipse cx="270" cy="96" fill="#141714" rx="11" ry="16"/>
+    <ellipse cx="105" cy="180" fill="#0f5021" rx="14" ry="9"/>
+    <ellipse cx="300" cy="172" fill="#0f5021" rx="11" ry="8"/>
+    <path d="M140 168 Q 200 200 260 168" fill="none" stroke="#141714" stroke-linecap="round" stroke-width="8"/>
+    <ellipse cx="140" cy="292" fill="#0f5021" rx="34" ry="14" stroke="#141714" stroke-width="7"/>
+    <ellipse cx="260" cy="292" fill="#0f5021" rx="34" ry="14" stroke="#141714" stroke-width="7"/>
+  </g>
+  </svg>
+  <text x="630" y="400" fill="#141714" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="150" font-weight="700">Frogly</text>
+  <text x="634" y="475" fill="#0f5021" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="40">Decoys your traders never see</text>
 </svg>
