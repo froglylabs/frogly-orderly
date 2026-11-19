@@ -1,0 +1,19 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+
+# Local end-to-end run output, at any depth (the host copy lives outside this repo)
+.output/
+
+# Editors and OS files
+.vscode
+.idea
+.DS_Store
+
+# Local npm settings must never be committed
+.npmrc
+
+# Logs
+*.log

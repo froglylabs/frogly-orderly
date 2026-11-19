@@ -1,0 +1,11 @@
+# No dependency may run an install script. esbuild works without its
+# postinstall (it finds its binary in @esbuild/<platform>); the rest are
+# native modules deep inside Orderly's own dependency tree that this plugin
+# never loads.
+allowBuilds:
+  bigint-buffer: false
+  bufferutil: false
+  esbuild: false
+  keccak: false
+  secp256k1: false
+  utf-8-validate: false

@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      # actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+
+      # pnpm/action-setup@v4
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1
+        with:
+          version: 12.21.0
+
+      # actions/setup-node@v5
+      # registry-url writes the .npmrc npm publish needs. No dependency cache in
+      # the release job, so nothing cached by another workflow reaches it.
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: "24.20.0"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+
+      # Trusted publishing needs npm 11.5.1 or later.
+      - name: Use npm 11
+        run: npm install -g npm@11.19.0
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      - name: Verify pinned core
+        run: pnpm verify:core
+
+      - name: Live DEX Creator exports every name the plugin imports
+        run: pnpm check:live
+
+      - name: Orderly check (strict)
+        run: pnpm exec orderly-devkit check --path . --strict
+
+      - name: Orderly schema check
+        run: pnpm exec orderly-devkit schema --path . --check
+
+      - name: Tag matches package.json version
+        run: test "v$(node -p "require('./package.json').version")" = "$GITHUB_REF_NAME"
+
+      - name: Publish to npm
+        env:
+          # Trusted publishing (OIDC) needs no token: npm uses the id-token
+          # permission above. NPM_TOKEN exists only for the one-time first
+          # release described in RELEASING.md; delete it afterwards.
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          node --version
+          npm --version
+          npm publish --access public --provenance
