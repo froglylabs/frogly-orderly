@@ -67,9 +67,9 @@ export function registerFroglyPlugin(settings: FroglySettings = {}, options: Fro
       // replaced: the original renders with its own props, unchanged, and the
       // boot component next to it adds no DOM node. Targets are written inline
       // because Orderly's devkit reads them from these calls.
-      // Return a short array instead of a Fragment: DEX Creator's shared
-      // react/jsx-runtime import-map entry does not re-export Fragment, so a
-      // <>...</> wrapper fails to load the plugin at run time.
+      // A short array instead of a <>...</> Fragment keeps the plugin's
+      // react/jsx-runtime import to `jsx` alone: every name a runtime plugin
+      // imports must be exported by the host's shared files.
       interceptors: [
         createInterceptor("Account.AccountMenu", (Original, props) => [
           <Original key="frogly-original" {...props} />,
