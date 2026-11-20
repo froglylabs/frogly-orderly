@@ -1,6 +1,6 @@
 {
   "name": "@froglylabs/orderly-plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Frogly for Orderly: adds Frogly's pinned script to a DEX once, with the DEX's own site ID. Keep your DEX safe from AI attacks: when an automated intruder takes one of Frogly's hidden decoys, Frogly records it.",
   "license": "MIT",
   "author": "Frogly",

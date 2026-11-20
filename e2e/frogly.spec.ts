@@ -4,9 +4,9 @@ import { join } from "node:path";
 import { expect, test, type Page } from "@playwright/test";
 import vectors from "../test/site-id-vectors.json";
 
-const CORE_SRC = "https://cdn.frogly.ai/w/core.v5.js";
+const CORE_SRC = "https://cdn.frogly.ai/w/core.v6.js";
 const CORE_INTEGRITY =
-  "sha384-5PrNyFpjR+GGOLhFy+XWlvP9vJtqRDKWrSyGVuWYl907zw26TU0PSCod12iTAUdu";
+  "sha384-z29wAlCbvQ06jGYHkjK/R7MJkdaD1F4dfOlhsHFy6fPOAII/YzEZsPZDX4NtqIwV";
 
 /** The host's own config.js. The broker ID is read from it, never stored here. */
 const HOST_CONFIG_PATH =
@@ -28,7 +28,7 @@ if (typeof brokerId !== "string" || !Object.prototype.hasOwnProperty.call(vector
   );
 }
 const EXPECTED_SITE_ID = vectors[brokerId as keyof typeof vectors];
-const CFG_URL = `https://cdn.frogly.ai/cfg/${EXPECTED_SITE_ID}.json`;
+const CFG_URL = `https://cdn.frogly.ai/cfg/s/${EXPECTED_SITE_ID}.json`;
 
 /** The same config.js as the host, without any plugin. */
 const CONFIG_WITHOUT_PLUGIN = `window.__RUNTIME_CONFIG__ = ${JSON.stringify({
@@ -47,6 +47,7 @@ async function froglyScripts(page: Page) {
         crossorigin: script.getAttribute("crossorigin"),
         async: script.async,
         dataCfg: script.getAttribute("data-cfg"),
+        dataQuiet: script.getAttribute("data-quiet"),
         inHead: script.parentElement === document.head,
         attributes: Array.from(script.attributes)
           .map((a) => a.name)
@@ -120,9 +121,11 @@ test("Frogly adds one pinned script and leaves the account menu unchanged", asyn
   page.on("console", (msg) => {
     if (msg.type() !== "error") return;
     const where = msg.location()?.url ?? "";
-    // The config request answers 404 until Frogly's server side ships.
-    if (where.startsWith("https://cdn.frogly.ai/cfg/")) return;
-    errors.push(`${msg.text()} ${where}`.trim());
+    const line = `${msg.text()} ${where}`.trim();
+    // The core fails open when its config or event request fails. That is not
+    // a plugin error and not an integrity error.
+    if (/https:\/\/cdn\.frogly\.ai\/cfg\//.test(line) || /https:\/\/api\.frogly\.ai\//.test(line)) return;
+    errors.push(line);
   });
   page.on("pageerror", (error) => errors.push(error.message));
   const cfgStatus: number[] = [];
@@ -143,13 +146,14 @@ test("Frogly adds one pinned script and leaves the account menu unchanged", asyn
       crossorigin: "anonymous",
       async: true,
       dataCfg: EXPECTED_SITE_ID,
+      dataQuiet: "1",
       inHead: true,
-      attributes: ["async", "crossorigin", "data-cfg", "integrity", "src"],
+      attributes: ["async", "crossorigin", "data-cfg", "data-quiet", "integrity", "src"],
     },
   ]);
 
   // The browser ran the core (so the integrity check passed): the core then
-  // asks for its config. 404 is expected for now.
+  // asks for its signed config.
   await expect.poll(() => cfgStatus.length, { timeout: 30_000 }).toBeGreaterThan(0);
   console.log(`[${testInfo.project.name}] config request ${CFG_URL} answered ${cfgStatus[0]}`);
 

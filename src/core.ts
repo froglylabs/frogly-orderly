@@ -11,10 +11,10 @@
  * (docs/INTEGRITY.md). `pnpm verify:core` downloads the file and checks it
  * against CORE_INTEGRITY.
  */
-export const CORE_SRC = "https://cdn.frogly.ai/w/core.v5.js";
+export const CORE_SRC = "https://cdn.frogly.ai/w/core.v6.js";
 
 export const CORE_INTEGRITY =
-  "sha384-5PrNyFpjR+GGOLhFy+XWlvP9vJtqRDKWrSyGVuWYl907zw26TU0PSCod12iTAUdu";
+  "sha384-z29wAlCbvQ06jGYHkjK/R7MJkdaD1F4dfOlhsHFy6fPOAII/YzEZsPZDX4NtqIwV";
 
 /**
  * A script whose src starts with this prefix is Frogly's own line, pasted by

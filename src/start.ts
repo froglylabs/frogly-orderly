@@ -79,6 +79,7 @@ function addScript(siteId: string): void {
     script.setAttribute("integrity", CORE_INTEGRITY);
     script.setAttribute("crossorigin", "anonymous");
     script.setAttribute("data-cfg", siteId);
+    script.setAttribute("data-quiet", "1");
     document.head.appendChild(script);
   } catch {
     // Fail open.

@@ -71,7 +71,7 @@ describe("dist/index.mjs", () => {
     expect(source).toContain(`"${CORE_SRC}"`);
     expect(source).toContain(`"${CORE_INTEGRITY}"`);
     expect(source).toContain(`version: "${pkg.version}"`);
-    expect(CORE_SRC).toBe("https://cdn.frogly.ai/w/core.v5.js");
+    expect(CORE_SRC).toBe("https://cdn.frogly.ai/w/core.v6.js");
     expect(CORE_INTEGRITY).toMatch(/^sha384-[A-Za-z0-9+/]{64}$/);
   });
 

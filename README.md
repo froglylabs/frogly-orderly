@@ -12,8 +12,6 @@ Open your DEX in [DEX Creator](https://dex.orderly.network/), find **Frogly** in
 - **Pro, 19 USD a month:** maze on, 100 catches a month, up to 5 sites.
 - **Max, 99 USD a month:** maze on, unlimited catches and sites.
 
-Pro and Max are coming soon.
-
 ## See your catches
 
 Sign in at [frogly.ai/orderly](https://frogly.ai/orderly) with your DEX's broker wallet. One signature, no gas, no transaction. Frogly never asks for a seed phrase.
@@ -24,11 +22,12 @@ Exactly one tag, pinned by address and hash:
 
 ```html
 <script
-  src="https://cdn.frogly.ai/w/core.v5.js"
-  integrity="sha384-5PrNyFpjR+GGOLhFy+XWlvP9vJtqRDKWrSyGVuWYl907zw26TU0PSCod12iTAUdu"
+  src="https://cdn.frogly.ai/w/core.v6.js"
+  integrity="sha384-z29wAlCbvQ06jGYHkjK/R7MJkdaD1F4dfOlhsHFy6fPOAII/YzEZsPZDX4NtqIwV"
   crossorigin="anonymous"
   async
   data-cfg="YOUR_SITE_ID"
+  data-quiet="1"
 ></script>
 ```
 
@@ -50,12 +49,11 @@ The plugin makes no network request of its own. The script it adds is the same p
 Described from the published source at [froglylabs/frogly-widget](https://github.com/froglylabs/frogly-widget):
 
 - Reads the site ID from `data-cfg`.
-- Loads `https://cdn.frogly.ai/cfg/<SITE_ID>.json` (CORS, credentials omit). If Frogly has no config for the DEX, that request answers 404 and the core does nothing further.
+- Loads `https://cdn.frogly.ai/cfg/s/<SITE_ID>.json` (CORS, credentials omit) and checks its signature against the public key pinned inside the core before anything else. If the request answers 404, or the signature is missing or invalid, the core does nothing further. The key, the config format and a small verifier are published in [docs/CONFIG-SIGNATURE.md](https://github.com/froglylabs/frogly-widget/blob/main/docs/CONFIG-SIGNATURE.md).
 - When a config is present, talks to `https://` + `portal_host` (api.frogly.ai): a `check_in` and later event POSTs to `/v1/events` (JSON, keepalive).
 - Keeps one random session key in `sessionStorage` (`cfg_sid`). No cookies.
 - Places hidden decoys in one off-screen box (`position:absolute;left:-10000px`, `aria-hidden`, `tabindex="-1"`) appended to `document.body`. Traders never see them.
-- Its form check follows the site's config (`forms`). Orderly DEX site configs start with forms off.
-- Footer links stay off unless the config sets `footer_links: true` (no site sets that).
+- With `data-quiet="1"`, the core never places visible links and never reads form fields, whatever the config says.
 - Fails open if the config or event request fails. Never uses `eval`, `new Function`, `innerHTML`, or `document.write`.
 
 ## Check the hash yourself
@@ -63,11 +61,11 @@ Described from the published source at [froglylabs/frogly-widget](https://github
 From the frogly-widget README:
 
 ```bash
-cd ~ && curl -s https://cdn.frogly.ai/w/core.v5.js | shasum -a 256
+cd ~ && curl -s https://cdn.frogly.ai/w/core.v6.js | shasum -a 256
 ```
 
 ```bash
-cd ~ && curl -s https://cdn.frogly.ai/w/core.v5.js | openssl dgst -sha384 -binary | openssl base64 -A
+cd ~ && curl -s https://cdn.frogly.ai/w/core.v6.js | openssl dgst -sha384 -binary | openssl base64 -A
 ```
 
 The second command prints the SRI value of the served file, without the `sha384-` prefix. It must match the integrity value above.

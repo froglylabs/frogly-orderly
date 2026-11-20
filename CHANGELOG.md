@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2
+
+- Loads Frogly core version 6. The whole site config is now signed, and the core checks the signature against a public key pinned inside it before it does anything. If the signature is missing or invalid, the core does nothing.
+- The script tag now carries data-quiet="1". With it, the core never places visible links and never reads form fields on a DEX, whatever the config says.
+- The key, the config format and a small verifier are published at https://github.com/froglylabs/frogly-widget (docs/CONFIG-SIGNATURE.md).
+
 ## 0.1.1
 
 - Wording only: Free on Orderly DEXs now includes the maze. Settings text, listing description and README updated.

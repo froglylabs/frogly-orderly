@@ -21,18 +21,19 @@ describe("startFrogly with broker frogly-test", () => {
     const [script] = scripts;
     expect(script.parentElement).toBe(document.head);
     expect(script.getAttribute("src")).toBe(CORE_SRC);
-    expect(script.getAttribute("src")).toBe("https://cdn.frogly.ai/w/core.v5.js");
+    expect(script.getAttribute("src")).toBe("https://cdn.frogly.ai/w/core.v6.js");
     expect(script.getAttribute("integrity")).toBe(CORE_INTEGRITY);
     expect(script.getAttribute("integrity")).toBe(
-      "sha384-5PrNyFpjR+GGOLhFy+XWlvP9vJtqRDKWrSyGVuWYl907zw26TU0PSCod12iTAUdu",
+      "sha384-z29wAlCbvQ06jGYHkjK/R7MJkdaD1F4dfOlhsHFy6fPOAII/YzEZsPZDX4NtqIwV",
     );
     expect(script.getAttribute("crossorigin")).toBe("anonymous");
     expect(script.async).toBe(true);
     expect(script.getAttribute("data-cfg")).toBe(TEST_SITE_ID);
+    expect(script.getAttribute("data-quiet")).toBe("1");
     // Nothing else: no inline code, no extra attributes.
     expect(script.textContent).toBe("");
     expect(Array.from(script.attributes).map((a) => a.name).sort()).toEqual(
-      ["async", "crossorigin", "data-cfg", "integrity", "src"].sort(),
+      ["async", "crossorigin", "data-cfg", "data-quiet", "integrity", "src"].sort(),
     );
     // Only the script was added to the page.
     expect(document.head.children).toHaveLength(1);
@@ -64,7 +65,11 @@ describe("startFrogly adds no script for", () => {
   });
 
   it("a page that already loads Frogly itself (old or new form)", async () => {
-    for (const src of ["https://cdn.frogly.ai/w/core.v4.js", "https://cdn.frogly.ai/w/core.v5.js"]) {
+    for (const src of [
+      "https://cdn.frogly.ai/w/core.v4.js",
+      "https://cdn.frogly.ai/w/core.v5.js",
+      "https://cdn.frogly.ai/w/core.v6.js",
+    ]) {
       resetPage();
       const pasted = document.createElement("script");
       pasted.src = src;
